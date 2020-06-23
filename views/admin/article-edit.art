@@ -1,0 +1,104 @@
+{{extend './common/layout.art'}}
+{{block 'main'}}
+{{include './common/header.art'}}
+<!-- 主体内容 -->
+<div class="content">
+    {{include './common/aside.art'}}
+    <div class="main">
+        <!-- 分类标题 -->
+        <div class="title">
+            <h4>{{@article&&article.author.username?article.author.username:'发布新'}}的文章</h4>
+            <p class="tips">{{message}}</p>
+        </div>
+        <!-- /分类标题 -->
+        <form class="form-container" action={{link}}  method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>标题</label>
+                <input type="text" class="form-control" placeholder="请输入文章标题" name="title" value="{{article&&article.title}}">
+            </div>
+            <div class="form-group">
+                <label>作者</label>
+                <input type="text" class="form-control" readonly name="author" value={{@userInfo._id}}>
+            </div>
+            <div class="form-group">
+                <label>发布时间</label>
+                <input type="date" class="form-control" name="publishDate" value="{{article&&dateFormat(article.publishDate,'yyyy-mm-dd')}}">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputFile">文章封面</label>
+                <input type="file" name="cover" id="file">
+                <div class="thumbnail-waper">
+                    <img class="img-thumbnail" src="{{article&&article.cover}}" id="preview">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>内容</label>
+                <textarea class="form-control" id="editor" name="content">{{article&&article.content}}</textarea>
+            </div>
+            <div class="buttons">
+                <input type="submit" class="btn btn-primary" value={{button}}>
+            </div>
+        </form>
+
+    </div>
+</div>
+<!-- /主体内容 -->
+{{/block}}
+{{block 'script'}}
+<script src="/admin/lib/ckeditor5/ckeditor.js"></script>
+<script type="text/javascript">
+
+    let editor;
+
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(newEditor => {
+            editor = newEditor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // 获取数据
+    // const editorData = editor.getData();
+
+    // 选择文件上传控件
+    var file = document.querySelector('#file');
+    var preview = document.querySelector('#preview');
+    // 当用户选择完文件以后
+    file.onchange = function () {
+        // 1.创建文件读取对象
+        var reader = new FileReader();
+        // this.files 用户选择文件列表
+        // 2.读取文件
+        reader.readAsDataURL(this.files[0]);
+        // 3.监听onload事件
+        reader.onload = function () {
+            // console.log(reader.result);
+            // 将文件读取的结果显示都页面中
+            preview.src = reader.result;
+        };
+        // readmultifiles(this.files);
+    }
+
+    // 选择多个文件,用递归的方式读取
+    function readmultifiles(files) {
+        var reader = new FileReader();
+        function readFile(index) {
+            if (index >= files.length) return;
+            var f = files[index];
+            reader.onload = function (e) {
+                var bin = e.target.result;
+                var img = document.createElement('img');
+                img.className = "img-thumbnail";
+                img.src = bin;
+                file.nextElementSibling.appendChild(img);
+                readFile(index + 1)
+            }
+            reader.readAsDataURL(f);
+        }
+        readFile(0);
+    }
+</script>
+{{/block}}
