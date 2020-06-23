@@ -266,27 +266,43 @@
 
 （1）以系统管理员的方式运行powershell
 
-（2）连接数据库mongo
+（2）连接数据库
 
-（3）查看数据库show dbs
+    mongo
 
-（4）切换到admin数据库use admin
+（3）查看数据库
 
-（5）创建超级管理员账户db.createUser()
+    show dbs
 
-（6）切换到blog数据use blog
+（4）切换到admin数据库
 
-（7）创建普通账号db.createUser()
+    use admin
+
+（5）创建超级管理员账户（省略格式）
+
+    db.createUser()
+
+（6）切换到blog数据
+
+    use blog
+
+（7）创建普通账号（省略格式）
+
+    db.createUser()
 
 （8）卸载mongodb服务
 
-    停止服务net stop mongodb
-    mongod --remove
+    先停止服务  net stop mongodb
+     
+    再移除  mongod --remove
+     
 （9）创建mongodb服务
 
     mongod --logpath='D:\MongoDB\log\mongod.log' --dbpath='D:\MongoDB\data' --install --auth 
 
-（10）启动mongodb服务net start mongodb
+（10）启动mongodb服务
+
+    net start mongodb
 
 （11）在项目中使用账号连接数据库
 
