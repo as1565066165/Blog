@@ -32,15 +32,15 @@
 
       npm init -y
 
-3.下载项目所需第三方模块
+（3）下载项目所需第三方模块
 
       npm install express mongoose art-template express- art- template
 
-4.创建网站服务器
+（4）创建网站服务器
 
-5.构建模块化路由
+（5）构建模块化路由
 
-6.构建博客管理页面模板
+（6）构建博客管理页面模板
 
     注意：模板中的相对路径是相对于地址栏的请求路径的  login内部的外链文件是相对于admin目录下面的文件
 
