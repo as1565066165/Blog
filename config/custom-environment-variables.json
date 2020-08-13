@@ -1,5 +1,5 @@
 {
-    "db": {
-        "pwd": "APP_PASSWORD"
-    }
+  "db": {
+    "pwd": "APP_PASSWORD"
+  }
 }

@@ -13,6 +13,12 @@
 			  			文章管理
 			  		</a>
                 </li>
+                 <li>
+                    <a class="item {{currentLink=='comment'?'active':''}}" href="/admin/comment">
+			  			<span class="glyphicon glyphicon-comment"></span>
+			  			评论管理
+			  		</a>
+                </li>
             </ul>
             <div class="cprt">
                 Powered by <a href="https://user.qzone.qq.com/1565066165?source=namecardhoverqzone" target="_blank">小白</a>
