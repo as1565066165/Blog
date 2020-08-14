@@ -44,7 +44,7 @@
 							<span>{{$value.uid.email}}</span>
 						</div>
 						<div class="comment-content">
-							{{@$value.content}}
+							{{@htmlEncode($value.content)}}
 						</div>
 					</div>
 					{{/each}}

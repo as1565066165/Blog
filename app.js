@@ -14,6 +14,8 @@ const template = require('art-template');
 const session = require('express-session');
 // 引用dateformat模块
 const dateFormat = require('dateformat');
+// 引入htmlEncode模块
+const htmlEncode = require('./middleware/htmlEncode')
 // 引入morgan模块
 const morgan = require('morgan');
 // 引入config模块
@@ -45,6 +47,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'art');
 // 想模板内部导入dateFormat变量
 template.defaults.imports.dateFormat = dateFormat;
+template.defaults.imports.htmlEncode = htmlEncode;
 // 开放静态资源文件
 app.use(express.static(path.join(__dirname, 'public')));
 // 设置favicon请求默认路径
@@ -69,6 +72,7 @@ if (process.env.NODE_ENV == 'develoment') {
 // 引入路由对象
 const home = require('./route/home');
 const admin = require('./route/admin');
+const artTemplate = require('art-template');
 
 // 拦截请求判断用户的登录状态
 app.use('/admin', require('./middleware/loginGuard'));
